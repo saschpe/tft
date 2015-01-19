@@ -39,6 +39,8 @@ INFO_LAST_MODIFIED_RE = re.compile('Last modified: (.*)\r')
 
 def destroy(args):
     tf_dir_cmd = TF_DIR_DELETED_FOLDERS_TEMPLATE.format(args.itemspec)
+    if args.recursive:
+        tf_dir_cmd += ' /recursive'
     output = subprocess.check_output(tf_dir_cmd, shell=True).decode('cp1252')
     if args.verbose and args.verbose > 0:
         print('Executing "{0}"...'.format(tf_dir_cmd))
