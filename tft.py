@@ -15,7 +15,7 @@
 # limitations under the License.
 
 __author__ = 'Sascha Peilicke <saschpe@mailbox.org>'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 import argparse
 import datetime
@@ -39,7 +39,7 @@ INFO_LAST_MODIFIED_RE = re.compile('Last modified: (.*)\r')
 
 def destroy(args):
     tf_dir_cmd = TF_DIR_DELETED_FOLDERS_TEMPLATE.format(args.itemspec)
-    output = subprocess.check_output(tf_dir_cmd, shell=True).decode()
+    output = subprocess.check_output(tf_dir_cmd, shell=True).decode('cp1252')
     if args.verbose and args.verbose > 0:
         print('Executing "{0}"...'.format(tf_dir_cmd))
     lines = output.split('\r\n')
@@ -52,7 +52,7 @@ def destroy(args):
             if args.verbose and args.verbose > 0:
                 print('Found {0}'.format(absolute_item_path))
             tf_info_cmd = TF_INFO_TEMPLATE.format(absolute_item_path)
-            output = subprocess.check_output(tf_info_cmd, shell=True).decode()
+            output = subprocess.check_output(tf_info_cmd, shell=True).decode('cp1252')
             result = INFO_LAST_MODIFIED_RE.search(output)
             if (result):
                 delta = datetime.datetime.now() - datetime.datetime.strptime(result.group(1), '%A, %d. %B %Y %H:%M:%S')
