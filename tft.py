@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -68,7 +68,7 @@ def destroy(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='TFS tool')
+    parser = argparse.ArgumentParser(description='Team Foundation Server commandline utility. Implements some useful commands otherwise missing from tf.exe.')
     parser.add_argument('-v', '--verbose', action='count', help='enable verbose output [-v or -vv]')
     parser.add_argument('-n', '--no-prompt', action='store_true', help='do not ask for confirmation')
 
