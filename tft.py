@@ -49,8 +49,6 @@ def destroy(args):
         if ';X' in line:
             item = line.split(';X')[0][1:]  # Items look like '$123;X456', we care for 123
             absolute_item_path = '{0}/{1}'.format(absolute_folder_path, item)
-            if args.verbose and args.verbose > 0:
-                print('Found {0}'.format(absolute_item_path))
             tf_info_cmd = TF_INFO_TEMPLATE.format(absolute_item_path)
             output = subprocess.check_output(tf_info_cmd, shell=True).decode('cp1252')
             result = INFO_LAST_MODIFIED_RE.search(output)
@@ -63,7 +61,7 @@ def destroy(args):
                     if args.verbose and args.verbose < 2:
                         tf_destroy_cmd += ' /silent'
                     if args.verbose and args.verbose > 0:
-                        print('Executing "{0}"...'.format(tf_destroy_cmd))
+                        print('Found {0} ({1} days old), executing "{2}"...'.format(absolute_item_path, delta.days, tf_destroy_cmd))
                     subprocess.call(tf_destroy_cmd, stdin=sys.stdin, stdout=sys.stdout, shell=True)
 
 
