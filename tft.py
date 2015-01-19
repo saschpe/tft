@@ -45,8 +45,6 @@ def destroy(args):
                         tf_destroy_cmd += ' /noprompt'
                     if args.verbose:
                         print('Executing "{0}"...'.format(tf_destroy_cmd))
-                    #subprocess.check_output(tf_destroy_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
-                    #subprocess.call(tf_destroy_cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
                     subprocess.call(tf_destroy_cmd, stdin=sys.stdin, stdout=sys.stdout, shell=True)
 
 
