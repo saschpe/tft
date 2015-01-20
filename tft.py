@@ -31,10 +31,10 @@ locale.setlocale(locale.LC_ALL, '')
 
 DEFAULT_TFS_ITEMSPEC_PREFIX = '$/HDE/Branches/404'
 
-TF_DIR_DELETED_FOLDERS_TEMPLATE = 'tf dir {0} /folders /deleted'
-TF_INFO_TEMPLATE = 'tf info {0}'
-TF_DESTROY_TEMPLATE = 'tf destroy {0}'
-INFO_LAST_MODIFIED_RE = re.compile('Last modified: (.*)\r')
+TF_DIR_DELETED_FOLDERS_TEMPLATE = 'tf dir "{0}" /folders /deleted'
+TF_INFO_TEMPLATE = 'tf info "{0}"'
+TF_INFO_LAST_MODIFIED_RE = re.compile('Last modified: (.*)\r')
+TF_DESTROY_TEMPLATE = 'tf destroy "{0}"'
 
 
 def destroy(args):
@@ -53,7 +53,7 @@ def destroy(args):
             absolute_item_path = '{0}/{1}'.format(absolute_folder_path, item)
             tf_info_cmd = TF_INFO_TEMPLATE.format(absolute_item_path)
             output = subprocess.check_output(tf_info_cmd, shell=True).decode('cp1252')
-            result = INFO_LAST_MODIFIED_RE.search(output)
+            result = TF_INFO_LAST_MODIFIED_RE.search(output)
             if (result):
                 delta = datetime.datetime.now() - datetime.datetime.strptime(result.group(1), '%A, %d. %B %Y %H:%M:%S')
                 if delta.days > args.destroy_after:
